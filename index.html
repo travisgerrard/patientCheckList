@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Patient Parser</title>
+  </head>
+  <body>
+    <textarea id="listInfo" rows="4" cols="50">this     is     a     test</textarea>
+    <button type="button" id="submitButton">Submit</button>
+    <div id="printArea">
+
+    </div>
+    <script>
+      document.getElementById("submitButton").addEventListener("click", buttonClicked);
+      function buttonClicked() {
+        var beginString = document.getElementById("listInfo").value.trim()
+        var choppedString = beginString.split("     ");
+          for (let string of choppedString) {
+            console.log(string);
+            var elementOne = document.createElement("div");
+            elementOne.appendChild(document.createTextNode(string));
+            var elementTwo = document.createElement("div");
+            elementTwo.appendChild(document.createTextNode("_testing"));
+            elementOne.appendChild(elementTwo);
+            document.getElementById('printArea').appendChild(elementOne);
+          }
+      };
+    </script>
+  </body>
+</html>
