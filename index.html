@@ -1,30 +1,110 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Patient Parser</title>
-  </head>
-  <body>
-    <textarea id="listInfo" rows="4" cols="50">this     is     a     test</textarea>
+    <style>
+        #nameText {
+            text-align: center;
+        }
+
+        ;
+    </style>
+</head>
+
+<body>
+    <textarea id="listInfo" rows="4" cols="50"></textarea>
     <button type="button" id="submitButton">Submit</button>
     <div id="printArea">
 
     </div>
+
+    <input type="button" onclick="printDiv('printArea')" value="print a div!" />
     <script>
-      document.getElementById("submitButton").addEventListener("click", buttonClicked);
-      function buttonClicked() {
-        var beginString = document.getElementById("listInfo").value.trim()
-        var choppedString = beginString.split("     ");
-          for (let string of choppedString) {
-            console.log(string);
-            var elementOne = document.createElement("div");
-            elementOne.appendChild(document.createTextNode(string));
-            var elementTwo = document.createElement("div");
-            elementTwo.appendChild(document.createTextNode("_testing"));
-            elementOne.appendChild(elementTwo);
-            document.getElementById('printArea').appendChild(elementOne);
-          }
-      };
+        document.getElementById("submitButton").addEventListener("click", buttonClicked);
+
+        function buttonClicked() {
+            //console.log(document.getElementById("listInfo").value.trim());
+            var beginString = document.getElementById("listInfo").value.trim()
+            var choppedStringOne = beginString.split("		");
+            for (let stringOne of choppedStringOne) {
+                var choppedStringTwo = stringOne.split("	");
+                var i = 0;
+                var elementOne = document.createElement("div");
+
+                for (let stringTwo of choppedStringTwo) {
+                    switch (i) {
+                        case 0:
+                            var nameText = `Name is ${stringTwo}`;
+                            console.log(nameText);
+                            var elementTwo = document.createElement("div");
+                            elementTwo.id = "nameText";
+                            elementTwo.appendChild(document.createTextNode(nameText));
+                            elementOne.appendChild(elementTwo);
+                            break;
+                        case 1:
+                            var roomText = `Room # is ${stringTwo}`;
+                            console.log(roomText);
+                            var elementTwo = document.createElement("div");
+                            elementTwo.appendChild(document.createTextNode(roomText));
+                            elementOne.appendChild(elementTwo);
+                            break;
+                        case 2:
+                            var ageText = `Age is ${stringTwo}`;
+                            console.log(ageText)
+                            var elementTwo = document.createElement("div");
+                            elementTwo.appendChild(document.createTextNode(ageText));
+                            elementOne.appendChild(elementTwo);
+                            break;
+                        case 3:
+                            var genderText = `Gender is ${stringTwo}`;
+                            console.log(genderText)
+                            var elementTwo = document.createElement("div");
+                            elementTwo.appendChild(document.createTextNode(genderText));
+                            elementOne.appendChild(elementTwo);
+                            break;
+                        case 4:
+                            var mrnText = `MRN is ${stringTwo}`;
+                            console.log(mrnText);
+                            var elementTwo = document.createElement("div");
+                            elementTwo.appendChild(document.createTextNode(mrnText));
+                            elementOne.appendChild(elementTwo);
+                            break;
+                        case 5:
+                            var losText = `Length of stay ${stringTwo}`;
+                            console.log(losText);
+                            var elementTwo = document.createElement("div");
+                            elementTwo.appendChild(document.createTextNode(losText));
+                            elementOne.appendChild(elementTwo);
+                            break;
+                        default:
+                            var elementTwo = document.createElement("div");
+                            elementTwo.appendChild(document.createTextNode("Break!"));
+                            elementOne.appendChild(elementTwo);
+
+
+                    }
+                    document.getElementById('printArea').appendChild(elementOne);
+                    i++;
+                }
+
+
+            }
+
+        };
+
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
     </script>
-  </body>
+</body>
+
 </html>
