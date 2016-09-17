@@ -7,18 +7,43 @@
     <style>
         #patientTotalInfo {
             width: 100%;
-            text-align: center;
+            text-align: left;
         }
 
         #patientInfo {
-            width: 250px;
+            width: 200px;
             /*float: left;*/
             display: inline-block;
             zoom: 1;
         }
 
-        #dailtTodo {
-            width: 300px;
+        #dailyTodo {
+            width: 225px;
+            font-size: 12px;
+            /*float: left;*/
+            display: inline-block;
+            zoom: 1;
+        }
+
+        #dailyTodo li:before {
+            content: "\2610";
+            margin-right: 5px;
+        }
+
+        #followUps {
+            width: 150px;
+            /*float: left;*/
+            display: inline-block;
+            zoom: 1;
+        }
+
+        #followUps li:before {
+            content: "\2610";
+            margin-right: 5px;
+        }
+
+        #cbcAndBmr {
+            width: 140px;
             /*float: left;*/
             display: inline-block;
             zoom: 1;
@@ -27,14 +52,19 @@
         ul {
             list-style: none;
         }
-
+        /*
         li:before {
             content: "\2610";
             margin-right: 5px;
         }
+*/
 
         #nameText {
-            text-align: center;
+            font-weight: bold;
+        }
+
+        #image {
+            content: url(http://placehold.it/350x150);
         }
 
         ;
@@ -66,7 +96,25 @@
                 "D: disharge / disposition plans",
                 "S: Safety Issues"
             ];
-            //console.log(document.getElementById("listInfo").value.trim());
+            var followUps = ["___________________",
+                "___________________",
+                "___________________",
+                "___________________",
+                "___________________",
+                "___________________"
+            ];
+            var cbcAndBmr = [
+
+                "       \\____/",
+                "       /        \\",
+
+                " ",
+
+                "___|____|___/",
+                "      |        |      \\"
+
+            ];
+
             var beginString = document.getElementById("listInfo").value.trim()
             var choppedStringOne = beginString.split("		");
             for (let stringOne of choppedStringOne) { //Breaks entered text into patient specific chunks
@@ -80,7 +128,7 @@
                 for (let stringTwo of choppedStringTwo) { //Breaks a patient chunck into it's specific parts
                     switch (i) {
                         case 0:
-                            var nameText = `Name is ${stringTwo}`;
+                            var nameText = `${stringTwo}`;
                             console.log(nameText);
                             var elementThree = document.createElement("div");
                             elementThree.id = "nameText";
@@ -88,28 +136,28 @@
                             elementTwo.appendChild(elementThree);
                             break;
                         case 1:
-                            var roomText = `Room # is ${stringTwo}`;
+                            var roomText = `Room ${stringTwo}`;
                             console.log(roomText);
                             var elementThree = document.createElement("div");
                             elementThree.appendChild(document.createTextNode(roomText));
                             elementTwo.appendChild(elementThree);
                             break;
                         case 2:
-                            var ageText = `Age is ${stringTwo}`;
+                            var ageText = `Age: ${stringTwo}`;
                             console.log(ageText)
                             var elementThree = document.createElement("div");
                             elementThree.appendChild(document.createTextNode(ageText));
                             elementTwo.appendChild(elementThree);
                             break;
                         case 3:
-                            var genderText = `Gender is ${stringTwo}`;
+                            var genderText = `Gender: ${stringTwo}`;
                             console.log(genderText)
                             var elementThree = document.createElement("div");
                             elementThree.appendChild(document.createTextNode(genderText));
                             elementTwo.appendChild(elementThree);
                             break;
                         case 4:
-                            var mrnText = `MRN is ${stringTwo}`;
+                            var mrnText = `MRN: ${stringTwo}`;
                             console.log(mrnText);
                             var elementThree = document.createElement("div");
                             elementThree.appendChild(document.createTextNode(mrnText));
@@ -123,18 +171,33 @@
                             elementTwo.appendChild(elementThree);
                             break;
                         default:
-                            var elementThree = document.createElement("div");
-                            elementThree.appendChild(document.createTextNode("Break!"));
-                            elementTwo.appendChild(elementThree);
 
                     }
                     document.getElementById('printArea').appendChild(elementOne);
                     i++;
                 }
+
+                // create and add daily cbc and bmr...
+                var elementSix = document.createElement("div");
+                elementSix.id = "cbcAndBmr";
+                elementSix.style.whiteSpace = "pre";
+                elementSix.appendChild(makeUL(cbcAndBmr));
+                elementOne.appendChild(elementSix);
+
+
+                // create and add the daily todos
                 var elementFour = document.createElement("div");
-                elementFour.id = "dailtTodo";
+                elementFour.id = "dailyTodo";
                 elementFour.appendChild(makeUL(dailyToDos));
                 elementOne.appendChild(elementFour);
+
+                // creat and add some blanks for followups
+                var elementFive = document.createElement("div");
+                elementFive.id = "followUps";
+                elementFive.appendChild(makeUL(followUps));
+                elementOne.appendChild(elementFive);
+
+
             }
 
         };
