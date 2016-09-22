@@ -136,9 +136,10 @@
                             elementTwo.appendChild(elementThree);
                             break;
                         case 1:
-                            var roomText = `Room ${stringTwo}`;
+                            var roomText = `Room ${stringTwo}            I/O:`;
                             console.log(roomText);
                             var elementThree = document.createElement("div");
+                            elementThree.style.whiteSpace = "pre";
                             elementThree.appendChild(document.createTextNode(roomText));
                             elementTwo.appendChild(elementThree);
                             break;
@@ -171,8 +172,14 @@
                             elementTwo.appendChild(elementThree);
                             break;
                         default:
+                            // Add rounding order
+                            var raText = `Rounding order _____`;
+                            var elementRoundingOrder = document.createElement("div");
+                            elementRoundingOrder.appendChild(document.createTextNode(raText));
+                            elementTwo.appendChild(elementRoundingOrder);
 
                     }
+
                     document.getElementById('printArea').appendChild(elementOne);
                     i++;
                 }
