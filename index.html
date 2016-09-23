@@ -19,7 +19,7 @@
 
         #dailyTodo {
             width: 225px;
-            font-size: 12px;
+            /*font-size: 12px;*/
             /*float: left;*/
             display: inline-block;
             zoom: 1;
@@ -63,10 +63,6 @@
             font-weight: bold;
         }
 
-        #image {
-            content: url(http://placehold.it/350x150);
-        }
-
         ;
     </style>
 </head>
@@ -88,13 +84,13 @@
         document.getElementById("submitButton").addEventListener("click", buttonClicked);
 
         function buttonClicked() {
-            var dailyToDos = ["MAR 48: review daily",
-                "C: Catheters / Consults / Concerns",
-                "L: Labs / Lines",
-                "V: VTE Prophylaxis",
-                "B: Bundles",
-                "D: disharge / disposition plans",
-                "S: Safety Issues"
+            var dailyToDos = [
+                "Consults",
+                "Disharge / Dispo plans",
+                "Morning Labs",
+                "MAR 48: review daily",
+                "VTE Prophy / ☐ Saftey",
+                "Learning"
             ];
             var followUps = ["___________________",
                 "___________________",
@@ -111,7 +107,8 @@
                 " ",
 
                 "___|____|___/",
-                "      |        |      \\"
+                "      |        |      \\",
+                " "
 
             ];
 
@@ -136,7 +133,7 @@
                             elementTwo.appendChild(elementThree);
                             break;
                         case 1:
-                            var roomText = `Room ${stringTwo}            I/O:`;
+                            var roomText = `Room ${stringTwo}        ☐`;
                             console.log(roomText);
                             var elementThree = document.createElement("div");
                             elementThree.style.whiteSpace = "pre";
@@ -158,14 +155,15 @@
                             elementTwo.appendChild(elementThree);
                             break;
                         case 4:
-                            var mrnText = `MRN: ${stringTwo}`;
+                            var mrnText = `MRN: ${stringTwo}            I/O:`;
                             console.log(mrnText);
                             var elementThree = document.createElement("div");
+                            elementThree.style.whiteSpace = "pre";
                             elementThree.appendChild(document.createTextNode(mrnText));
                             elementTwo.appendChild(elementThree);
                             break;
                         case 5:
-                            var losText = `Length of stay ${stringTwo}`;
+                            var losText = `LOS: ${stringTwo}`;
                             console.log(losText);
                             var elementThree = document.createElement("div");
                             elementThree.appendChild(document.createTextNode(losText));
